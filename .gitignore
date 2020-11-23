@@ -13,3 +13,6 @@ npm-*.log
 .DS_Store
 stats.json
 .vscode
+lib-meet-hour.min.js
+lib-meet-hour.min.map
+lib-meet-hour.e2ww-worker.js
