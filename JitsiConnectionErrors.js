@@ -10,7 +10,7 @@
  * One example is 'item-not-found' error thrown by Prosody when the BOSH session
  * times out after 60 seconds of inactivity. On the other hand 'item-not-found'
  * could also happen when BOSH request is sent to the server with the session-id
- * that is not know to the server. But this should not happen in lib-jitsi-meet
+ * that is not know to the server. But this should not happen in lib-meet-hour
  * case as long as the service is configured correctly (there is no bug).
  */
 export const CONNECTION_DROPPED_ERROR = 'connection.droppedError';

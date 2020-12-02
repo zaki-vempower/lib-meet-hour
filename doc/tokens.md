@@ -2,7 +2,7 @@ JWT token authentication Prosody plugin
 ==================
 
 This plugin implements Prosody authentication provider that verifies client connection based on JWT token described in [RFC7519].
-It allows to use any external form of authentication with lib-jitsi-meet. Once your user authenticates you need to
+It allows to use any external form of authentication with lib-meet-hour. Once your user authenticates you need to
 generate the JWT token as described in the RFC and pass it to your client app. Once it connects with valid token is considered authenticated by jitsi-meet system.
 
 During configuration you will need to provide the *application ID* that identifies the client and a *secret* shared by both server and JWT token generator. Like described in the RFC, secret is used to compute HMAC hash value which allows to authenticate generated token. There are many existing libraries which can be used to implement token generator. More info can be found here: [http://jwt.io/#libraries-io]
@@ -40,7 +40,7 @@ In addition to the basic claims used in authentication, the token can also provi
   - 'avatar' is the URL of the avatar of the 'callee'
 
 #### Access token identifiers / context
-To access the data in lib-jitsi-meet you have to enable the prosody module `mod_presence_identity` in your config.
+To access the data in lib-meet-hour you have to enable the prosody module `mod_presence_identity` in your config.
 
 ```lua
 VirtualHost "jitmeet.example.com"
@@ -85,9 +85,9 @@ JWT token is currently checked in 2 places:
 - when user connects to Prosody through BOSH. Token value is passed as 'token' query paramater of BOSH URL. User uses XMPP anonymous authentication method.
 - when MUC room is being created/joined Prosody compares 'room' claim with the actual name of the room. In addition, the 'sub' claim is compare to either the tenant (for TENANT/ROOM URLs) or the base domain (for /ROOM URLs).  This prevents stolen token being abused by unathorized users to allocate new conference rooms in the system. Admin users are not required to provide valid token which is used by Jicofo for example.
 
-### Lib-jitsi-meet options
+### lib-meet-hour options
 
-When JWT authentication is used with *lib-jitsi-meet* the token is passed to *JitsiConference* constructor:
+When JWT authentication is used with *lib-meet-hour* the token is passed to *JitsiConference* constructor:
 
 ```
 var token = {token is provided by your application possibly after some authentication}

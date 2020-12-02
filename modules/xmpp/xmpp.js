@@ -51,7 +51,7 @@ function createConnection({ enableWebsocketResume, serviceUrl = '/http-bind', to
 }
 
 /**
- * Initializes Strophe plugins that need to work with Strophe.Connection directly rather than the lib-jitsi-meet's
+ * Initializes Strophe plugins that need to work with Strophe.Connection directly rather than the lib-meet-hour's
  * {@link XmppConnection} wrapper.
  *
  * @returns {void}
@@ -66,7 +66,9 @@ function initStropheNativePlugins() {
  * A list of ice servers to use by default for P2P.
  */
 export const DEFAULT_STUN_SERVERS = [
-    { urls: 'stun:meet-jit-si-turnrelay.jitsi.net:443' }
+    { urls: 'stun:stun.l.google.com:19302' },
+    { urls: 'stun:stun1.l.google.com:19302' },
+    { urls: 'stun:stun2.l.google.com:19302' }
 ];
 
 /**

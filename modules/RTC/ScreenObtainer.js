@@ -60,9 +60,9 @@ const ScreenObtainer = {
                         // detect this in the NWJS application by checking the
                         // streamId === "". Even better solution would be to
                         // stop calling GUM from the NWJS app and just pass the
-                        // streamId to lib-jitsi-meet. This way the desktop
+                        // streamId to lib-meet-hour. This way the desktop
                         // sharing implementation for NWJS and chrome extension
-                        // will be the same and lib-jitsi-meet will be able to
+                        // will be the same and lib-meet-hour will be able to
                         // control the constraints, check the streamId, etc.
                         //
                         // I cannot find documentation about "InvalidStateError"

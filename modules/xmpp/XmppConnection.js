@@ -11,7 +11,7 @@ import PingConnectionPlugin from './strophe.ping';
 const logger = getLogger(__filename);
 
 /**
- * The lib-jitsi-meet layer for {@link Strophe.Connection}.
+ * The lib-meet-hour layer for {@link Strophe.Connection}.
  */
 export default class XmppConnection extends Listenable {
     /**

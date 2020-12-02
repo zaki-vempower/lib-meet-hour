@@ -93,7 +93,7 @@ export const DTMF_SUPPORT_CHANGED = 'conference.dtmfSupportChanged';
 export const ENDPOINT_MESSAGE_RECEIVED = 'conference.endpoint_message_received';
 
 /**
- * NOTE This is lib-jitsi-meet internal event and can be removed at any time !
+ * NOTE This is lib-meet-hour internal event and can be removed at any time !
  *
  * Event emitted when conference transits, between one to one and multiparty JVB
  * conference. If the conference switches to P2P it's neither one to one nor

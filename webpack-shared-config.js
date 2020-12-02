@@ -15,7 +15,7 @@ module.exports = {
     mode: minimize ? 'production' : 'development',
     module: {
         rules: [ {
-            // Version this build of the lib-jitsi-meet library.
+            // Version this build of the lib-meet-hour library.
 
             loader: 'string-replace-loader',
             options: {

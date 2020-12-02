@@ -13,7 +13,7 @@ const MIN_REQUIRED_CHROME_VERSION = 72;
 // and BrowserDetection as separate objects in future.
 
 /**
- * Implements browser capabilities for lib-jitsi-meet.
+ * Implements browser capabilities for lib-meet-hour.
  */
 export default class BrowserCapabilities extends BrowserDetection {
     /**
@@ -182,6 +182,16 @@ export default class BrowserCapabilities extends BrowserDetection {
         // https://bugzilla.mozilla.org/show_bug.cgi?id=1241066
         // For Chrome and others we rely on 'googRtt'.
         return !this.isFirefox();
+    }
+
+    /**
+     * Returns whether or not the current browser can support capturing video,
+     * be it camera or desktop, and displaying received video.
+     *
+     * @returns {boolean}
+     */
+    supportsVideo() {
+        return true;
     }
 
     /**

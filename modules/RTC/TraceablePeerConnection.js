@@ -2199,8 +2199,13 @@ TraceablePeerConnection.prototype.setRemoteDescription = function(description) {
     if (browser.usesPlanB()) {
         // TODO the focus should squeze or explode the remote simulcast
         if (this.isSimulcastOn()) {
+            // Determine if "x-google-conference" needs to be added to the remote description.
+            // We need to add that flag for camera tracks always and for desktop tracks only when
+            // capScreenshareBitrate is disabled.
+            const enableConferenceFlag = !(this.options.capScreenshareBitrate && !hasCameraTrack(this));
+
             // eslint-disable-next-line no-param-reassign
-            description = this.simulcast.mungeRemoteDescription(description, true /* add x-google-conference flag */);
+            description = this.simulcast.mungeRemoteDescription(description, enableConferenceFlag /* add x-google-conference flag */);
             this.trace(
                 'setRemoteDescription::postTransform (simulcast)',
                 dumpSDP(description));
@@ -2282,7 +2287,7 @@ TraceablePeerConnection.prototype.setSenderVideoConstraint = function(frameHeigh
 
     // If layer suspension is disabled and sender constraint is not configured for the conference,
     // resolve here so that the encodings stay enabled. This can happen in custom apps built using
-    // lib-jitsi-meet.
+    // lib-meet-hour.
     if (newHeight === null) {
         return Promise.resolve();
     }
@@ -2291,7 +2296,7 @@ TraceablePeerConnection.prototype.setSenderVideoConstraint = function(frameHeigh
 
     const localVideoTrack = this.getLocalVideoTrack();
 
-    if (!localVideoTrack || localVideoTrack.isMuted()) {
+    if (!localVideoTrack || localVideoTrack.isMuted() || localVideoTrack.videoType !== VideoType.CAMERA) {
         return Promise.resolve();
     }
     const videoSender = this.findSenderByKind(MediaType.VIDEO);
@@ -2327,9 +2332,13 @@ TraceablePeerConnection.prototype.setSenderVideoConstraint = function(frameHeigh
         }
         this.tpcUtils.updateEncodingsResolution(parameters);
     } else if (newHeight > 0) {
-        parameters.encodings[0].scaleResolutionDownBy = localVideoTrack.resolution >= newHeight
-            ? Math.floor(localVideoTrack.resolution / newHeight)
-            : 1;
+        // Do not scale down the desktop tracks until QualityController is able to propagate the sender constraints
+        // only on the active media connection. Right now, the sender constraints received on the bridge channel
+        // are propagated on both the jvb and p2p connections in cases where they both are active at the same time.
+        parameters.encodings[0].scaleResolutionDownBy
+            = localVideoTrack.videoType === VideoType.DESKTOP || localVideoTrack.resolution <= newHeight
+                ? 1
+                : Math.floor(localVideoTrack.resolution / newHeight);
         parameters.encodings[0].active = true;
     } else {
         parameters.encodings[0].scaleResolutionDownBy = undefined;

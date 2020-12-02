@@ -218,7 +218,7 @@ export default class ConnectionQuality {
         }
 
         // TODO: consider ignoring these events and letting the user of
-        // lib-jitsi-meet handle these separately.
+        // lib-meet-hour handle these separately.
         conference.on(
             ConferenceEvents.CONNECTION_INTERRUPTED,
             () => {

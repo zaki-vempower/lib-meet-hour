@@ -1,7 +1,7 @@
 ; XXX The origin of the source code of this .flowconfig file is the jitsi-meet
-; project. As the NPM package jitsi-meet builds the NPM package lib-jitsi-meet
+; project. As the NPM package jitsi-meet builds the NPM package lib-meet-hour
 ; and jitsi-meet's react-native requires specific .flowconfig contents, it is
-; mandatory to keep the .flowconfig files of jitsi-meet and lib-jitsi-meet in
+; mandatory to keep the .flowconfig files of jitsi-meet and lib-meet-hour in
 ; sync (e.g. the flow-bin version).
 ;
 [ignore]

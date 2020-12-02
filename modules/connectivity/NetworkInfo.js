@@ -8,7 +8,7 @@ const logger = getLogger(__filename);
 
 /**
  * Module provides information about the current status of the internet
- * connection. Lib-jitsi-meet doesn't have any logic for detecting internet
+ * connection. lib-meet-hour doesn't have any logic for detecting internet
  * online/offline, but rather it relies on the information supplied by the app
  * that uses it. By default the online state is assumed and the lib acts as if
  * it was connected. See {@link JitsiMeetJS.setNetworkInfo}.

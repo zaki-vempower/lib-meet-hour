@@ -2,10 +2,10 @@
 
 const options = {
     hosts: {
-        domain: 'jitsi-meet.example.com',
-        muc: 'conference.jitsi-meet.example.com' // FIXME: use XEP-0030
+        domain: 'beta.meethour.io',
+        muc: 'conference.beta.meethour.io' // FIXME: use XEP-0030
     },
-    bosh: '//jitsi-meet.example.com/http-bind', // FIXME: use xep-0156 for that
+    bosh: 'https://beta.meethour.io/http-bind', // FIXME: use xep-0156 for that
 
     // The name of client node advertised in XEP-0115 'c' stanza
     clientNode: 'http://jitsi.org/jitsimeet'
@@ -16,7 +16,9 @@ const confOptions = {
 };
 
 let connection = null;
+
 let isJoined = false;
+
 let room = null;
 
 let localTracks = [];
@@ -24,7 +26,8 @@ const remoteTracks = {};
 
 /**
  * Handles local tracks.
- * @param tracks Array with JitsiTrack objects
+ *
+ * @param tracks - Array with JitsiTrack objects.
  */
 function onLocalTracks(tracks) {
     localTracks = tracks;
@@ -58,8 +61,9 @@ function onLocalTracks(tracks) {
 }
 
 /**
- * Handles remote tracks
- * @param track JitsiTrack object
+ * Handles remote tracks.
+ *
+ * @param track - JitsiTrack object.
  */
 function onRemoteTrack(track) {
     if (track.isLocal()) {
@@ -98,7 +102,7 @@ function onRemoteTrack(track) {
 }
 
 /**
- * That function is executed when the conference is joined
+ * That function is executed when the conference is joined.
  */
 function onConferenceJoined() {
     console.log('conference joined!');
@@ -125,7 +129,7 @@ function onUserLeft(id) {
 }
 
 /**
- * That function is called when connection is established successfully
+ * That function is called when connection is established successfully.
  */
 function onConnectionSuccess() {
     room = connection.initJitsiConference('conference', confOptions);

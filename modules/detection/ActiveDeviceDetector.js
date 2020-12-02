@@ -62,7 +62,7 @@ export default function getActiveAudioDevice() {
                     device.on(JitsiTrackEvents.TRACK_AUDIO_LEVEL_CHANGED, audioLevel => {
                         // This is a very naive approach but works, a more accurate one would be to use rnnoise in
                         // order to limit  the number of false positives. The 0.008 constant is due to how
-                        // LocalStatsCollector from lib-jitsi-meet publishes audio-levels, in this case 0.008 denotes //
+                        // LocalStatsCollector from lib-meet-hour publishes audio-levels, in this case 0.008 denotes //
                         // no input.
                         if (audioLevel > 0.008) {
                             stopActiveDevices(availableDevices);

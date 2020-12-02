@@ -10,7 +10,7 @@ const GlobalOnErrorHandler = require('../util/GlobalOnErrorHandler');
 const logger = getLogger(__filename);
 
 /**
- * The lib-jitsi-meet browser-agnostic names of the browser-specific keys
+ * The lib-meet-hour browser-agnostic names of the browser-specific keys
  * reported by RTCPeerConnection#getStats mapped by browser.
  */
 const KEYS_BY_BROWSER_TYPE = {};
@@ -227,7 +227,7 @@ export default function StatsCollector(
 
     /**
      * The function which is to be used to retrieve the value associated in a
-     * report returned by RTCPeerConnection#getStats with a lib-jitsi-meet
+     * report returned by RTCPeerConnection#getStats with a lib-meet-hour
      * browser-agnostic name/key.
      *
      * @function
@@ -385,13 +385,13 @@ StatsCollector.prototype.start = function(startAudioLevelStats) {
 /**
  * Defines a function which (1) is to be used as a StatsCollector method and (2)
  * gets the value from a specific report returned by RTCPeerConnection#getStats
- * associated with a lib-jitsi-meet browser-agnostic name.
+ * associated with a lib-meet-hour browser-agnostic name.
  *
  * @param {Object.<string,string>} keys the map of LibJitsi browser-agnostic
  * names to RTCPeerConnection#getStats browser-specific keys
  */
 StatsCollector.prototype._defineGetStatValueMethod = function(keys) {
-    // Define the function which converts a lib-jitsi-meet browser-asnostic name
+    // Define the function which converts a lib-meet-hour browser-asnostic name
     // to a browser-specific key of a report returned by
     // RTCPeerConnection#getStats.
     const keyFromName = function(name) {
@@ -451,7 +451,7 @@ StatsCollector.prototype._defineGetStatValueMethod = function(keys) {
 
     // Compose the 2 functions defined above to get a function which retrieves
     // the value from a specific report returned by RTCPeerConnection#getStats
-    // associated with a specific lib-jitsi-meet browser-agnostic name.
+    // associated with a specific lib-meet-hour browser-agnostic name.
     return (item, name) => itemStatByKey(item, keyFromName(name));
 };
 
@@ -999,14 +999,14 @@ StatsCollector.prototype.processAudioLevelReport = function() {
 /**
  * Defines a function which (1) is to be used as a StatsCollector method and (2)
  * gets the value from a specific report returned by RTCPeerConnection#getStats
- * associated with a lib-jitsi-meet browser-agnostic name in case of using
+ * associated with a lib-meet-hour browser-agnostic name in case of using
  * Promised based getStats.
  *
  * @param {Object.<string,string>} keys the map of LibJitsi browser-agnostic
  * names to RTCPeerConnection#getStats browser-specific keys
  */
 StatsCollector.prototype._defineNewGetStatValueMethod = function(keys) {
-    // Define the function which converts a lib-jitsi-meet browser-asnostic name
+    // Define the function which converts a lib-meet-hour browser-asnostic name
     // to a browser-specific key of a report returned by
     // RTCPeerConnection#getStats.
     const keyFromName = function(name) {
@@ -1022,7 +1022,7 @@ StatsCollector.prototype._defineNewGetStatValueMethod = function(keys) {
 
     // Compose the 2 functions defined above to get a function which retrieves
     // the value from a specific report returned by RTCPeerConnection#getStats
-    // associated with a specific lib-jitsi-meet browser-agnostic name.
+    // associated with a specific lib-meet-hour browser-agnostic name.
     return (item, name) => item[keyFromName(name)];
 };
 

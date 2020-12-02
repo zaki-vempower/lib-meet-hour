@@ -14,7 +14,7 @@ const MAX_CACHE_SIZE = 100;
 const logger = getLogger(__filename);
 
 /**
- * This class provides an API to lib-jitsi-meet and its users for sending
+ * This class provides an API to lib-meet-hour and its users for sending
  * analytics events. It serves as a bridge to different backend implementations
  * ("analytics handlers") and a cache for events attempted to be sent before
  * the analytics handlers were enabled.
