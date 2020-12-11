@@ -26,8 +26,7 @@ const remoteTracks = {};
 
 /**
  * Handles local tracks.
- *
- * @param tracks - Array with JitsiTrack objects.
+ * @param tracks Array with JitsiTrack objects
  */
 function onLocalTracks(tracks) {
     localTracks = tracks;
@@ -61,9 +60,8 @@ function onLocalTracks(tracks) {
 }
 
 /**
- * Handles remote tracks.
- *
- * @param track - JitsiTrack object.
+ * Handles remote tracks
+ * @param track JitsiTrack object
  */
 function onRemoteTrack(track) {
     if (track.isLocal()) {
@@ -102,7 +100,7 @@ function onRemoteTrack(track) {
 }
 
 /**
- * That function is executed when the conference is joined.
+ * That function is executed when the conference is joined
  */
 function onConferenceJoined() {
     console.log('conference joined!');
@@ -129,7 +127,7 @@ function onUserLeft(id) {
 }
 
 /**
- * That function is called when connection is established successfully.
+ * That function is called when connection is established successfully
  */
 function onConnectionSuccess() {
     room = connection.initJitsiConference('conference', confOptions);

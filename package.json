@@ -1,10 +1,10 @@
 {
   "name": "lib-meet-hour",
-  "version": "0.0.0",
-  "description": "JS library for accessing Jitsi server side deployments",
+  "version": "1.0.1",
+  "description": "JS library for accessing Meet Hour server side deployments",
   "repository": {
     "type": "git",
-    "url": "git://github.com/jitsi/lib-jitsi-meet"
+    "url": "git://github.com/v-empower/Meethour-Web-MobileApps"
   },
   "keywords": [
     "jingle",

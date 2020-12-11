@@ -66,9 +66,7 @@ function initStropheNativePlugins() {
  * A list of ice servers to use by default for P2P.
  */
 export const DEFAULT_STUN_SERVERS = [
-    { urls: 'stun:stun.l.google.com:19302' },
-    { urls: 'stun:stun1.l.google.com:19302' },
-    { urls: 'stun:stun2.l.google.com:19302' }
+    { urls: 'stun:meet-jit-si-turnrelay.jitsi.net:443' }
 ];
 
 /**
@@ -108,6 +106,11 @@ export default class XMPP extends Listenable {
 
         initStropheNativePlugins();
 
+        const xmppPing = options.xmppPing || {};
+
+        // let's ping the main domain (in case a guest one is used for the connection)
+        xmppPing.domain = options.hosts.domain;
+
         this.connection = createConnection({
             enableWebsocketResume: options.enableWebsocketResume,
 
@@ -115,7 +118,7 @@ export default class XMPP extends Listenable {
             serviceUrl: options.serviceUrl || options.bosh,
             token,
             websocketKeepAlive: options.websocketKeepAlive,
-            xmppPing: options.xmppPing
+            xmppPing
         });
 
         this._initStrophePlugins();
@@ -158,6 +161,13 @@ export default class XMPP extends Listenable {
         }
         if (this.options.enableOpusRed === true && browser.supportsAudioRed()) {
             this.caps.addFeature('http://jitsi.org/opus-red');
+        }
+
+        if (typeof this.options.enableRemb === 'undefined' || this.options.enableRemb) {
+            this.caps.addFeature('http://jitsi.org/remb');
+        }
+        if (typeof this.options.enableTcc === 'undefined' || this.options.enableTcc) {
+            this.caps.addFeature('http://jitsi.org/tcc');
         }
 
         // this is dealt with by SDP O/A so we don't need to announce this
@@ -222,15 +232,12 @@ export default class XMPP extends Listenable {
             // XmppConnection emits CONNECTED again on reconnect - a good opportunity to clear any "last error" flags
             this._resetState();
 
-            // Schedule ping ?
-            const pingJid = this.connection.domain;
-
             // FIXME no need to do it again on stream resume
-            this.caps.getFeaturesAndIdentities(pingJid)
+            this.caps.getFeaturesAndIdentities(this.options.hosts.domain)
                 .then(({ features, identities }) => {
                     if (!features.has(Strophe.NS.PING)) {
-                        logger.error(
-                            `Ping NOT supported by ${pingJid} - please enable ping in your XMPP server config`);
+                        logger.error(`Ping NOT supported by ${
+                            this.options.hosts.domain} - please enable ping in your XMPP server config`);
                     }
 
                     // check for speakerstats
@@ -534,7 +541,7 @@ export default class XMPP extends Listenable {
     ping(timeout) {
         return new Promise((resolve, reject) => {
             this.connection.ping
-                    .ping(this.connection.domain, resolve, reject, timeout);
+                    .ping(this.connection.options.hosts.domain, resolve, reject, timeout);
         });
     }
 
